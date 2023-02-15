@@ -1,15 +1,18 @@
 .container {
   padding: 0 0 1em 0;
   margin-top: 0.5em;
-  width: 202px;
+  width: 282px;
+  max-width: 282px;
   background-color: var(--cinza);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 6px;
 }
 
 .capa {
   width: 100%;
+  border-radius: 6px 6px 0 0;
 }
 
 .container h2,
