@@ -5,6 +5,7 @@ import { FavoritesProvider } from "./contexts/Favorites";
 import Favorites from "./pages/Favorites";
 
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import Player from "./pages/Player";
 
 function AppRoutes() {
@@ -16,6 +17,7 @@ function AppRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/favoritos" element={<Favorites />} />
             <Route path="/:id" element={<Player />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </FavoritesProvider>
       </Layout>

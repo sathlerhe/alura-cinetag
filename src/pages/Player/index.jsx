@@ -5,6 +5,7 @@ import Banner from "../../components/Banner";
 import Title from "../../components/Title";
 
 import videos from "../../json/db.json";
+import NotFound from "../NotFound";
 
 import styles from "./player.module.css";
 
@@ -14,6 +15,10 @@ function Player() {
   const video = videos.find((video) => {
     return video.id === Number(id);
   });
+
+  if (!video) {
+    return <NotFound />;
+  }
 
   return (
     <>
