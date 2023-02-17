@@ -3,12 +3,15 @@ import React from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Container from "../../components/Container";
+import { FavoritesProvider } from "../../contexts/Favorites";
 
 function Layout({ children }) {
   return (
     <>
       <Header />
-      <Container>{children}</Container>
+      <FavoritesProvider>
+        <Container>{children}</Container>
+      </FavoritesProvider>
       <Footer />
     </>
   );

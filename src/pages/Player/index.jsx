@@ -1,22 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import Banner from "../../components/Banner";
 import Title from "../../components/Title";
 
-import videos from "../../json/db.json";
 import NotFound from "../NotFound";
 
-import styles from "./player.module.css";
+import styles from "./Player.module.css";
 
 function Player() {
   const { id } = useParams();
+  const [video, setVideo] = useState();
+  const [loading, setLoading] = useState(false);
 
-  const video = videos.find((video) => {
-    return video.id === Number(id);
-  });
+  useEffect(() => {
+    const handleGetVideo = async () => {
+      setLoading(true);
+      await fetch(
+        `https://my-json-server.typicode.com/sathlerhe/cinetag-api/videos?id=${id}`
+      )
+        .then((res) => res.json())
+        .then((data) => setVideo(...data));
 
-  if (!video) {
+      setLoading(false)
+    };
+
+    handleGetVideo();
+  }, []);
+
+  if (!video && !loading) {
     return <NotFound />;
   }
 
@@ -28,13 +40,19 @@ function Player() {
       </Title>
 
       <section className={styles.container}>
-        <iframe
-          width="100%"
-          height="100%"
-          src={video.link}
-          title={video.titulo}
-          allow="accelerometer; autoplay; fullscreen; clipboard-write"
-        ></iframe>
+        {loading ? (
+          <div className={styles.loaderParent}>
+            <div className={styles.loader}></div>
+          </div>
+        ) : (
+          <iframe
+            width="100%"
+            height="100%"
+            src={video.link}
+            title={video.titulo}
+            allow="accelerometer; autoplay; fullscreen; clipboard-write"
+          ></iframe>
+        )}
       </section>
     </>
   );
